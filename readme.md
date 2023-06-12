@@ -15,8 +15,8 @@ Built with [LangChain](https://github.com/hwchase17/langchain),
 Still need to fix requirements.txt
 
 Download an LLM model and place it in /models
-LLM: default to [ggml-gpt4all-j-v1.3-groovy.bin](https://gpt4all.io/models/ggml-gpt4all-j-v1.3-groovy.bin). 
-Also testing with Vicuna non-quantized models
+LLM: default to [ggml-gpt4all-j-v1.3-groovy.bin](https://gpt4all.io/models/ggml-gpt4all-j-v1.3-groovy.bin). \
+Also testing with Vicuna (non-quantized models) shows some differences in the results.
 
 Rename `example.env` to `.env` and edit the variables:
 
@@ -69,7 +69,15 @@ chunk_overlap = 100
 ```
 as needed in the script based on the content files being ingested.
 
-The ingestor script creates a `db` folder containing the local chroma vectorstore, index, etc. \ 
+The ingestor script creates a `db` folder containing the local chroma vectorstore, index, etc. 
+ 
 To re-create the database, delete the `db` folder.
 
 NOTE: There seems to be some corrpution problem with the punkt archive on http://www.nltk.org/nltk_data/, so find it elsewhere and put it somewhere locally available to the environment.
+
+# Asking questions - testing the vector DB
+
+The second python file 'customGPT' allows you to test the results of injesting the files and get answers from the database. \
+Open customGPT.py in VSCode, run it, and wait for the question prompt to appear. \
+Enter a query, the results will appear after some time - depending on your CPU and how much data has been injested.
+
