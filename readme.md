@@ -16,7 +16,7 @@ Still need to fix requirements.txt
 
 Download an LLM model and place it in /models
 LLM: default to [ggml-gpt4all-j-v1.3-groovy.bin](https://gpt4all.io/models/ggml-gpt4all-j-v1.3-groovy.bin). 
-Also testing with Vicuna [stable-vicuna-13B.ggmlv3.q4_0.bin](https://huggingface.co/TheBloke/stable-vicuna-13B-GGML/tree/main)
+Also testing with Vicuna non-quantized models
 
 Rename `example.env` to `.env` and edit the variables:
 
