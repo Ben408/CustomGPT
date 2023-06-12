@@ -2,8 +2,9 @@
 import os
 import glob
 import sqlalchemy
+import logging
 import nltk.tokenize.punkt
-nltk.data.path.append('the/path/to/nltk_data/tokenizers/punkt.zip')
+nltk.data.path.append('/nltk_data/tokenizers/punkt.zip')
 from typing import List
 from dotenv import load_dotenv
 from multiprocessing import Pool
@@ -23,10 +24,12 @@ from langchain.document_loaders import (
     UnstructuredWordDocumentLoader,
 )
 
+from langchain.docstore.document import Document
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.vectorstores import Chroma
 from langchain.embeddings import HuggingFaceEmbeddings
-from langchain.docstore.document import Document
+from langchain.embeddings import HuggingFaceInstructEmbeddings
+
 from constants import CHROMA_SETTINGS
 
 
@@ -80,7 +83,7 @@ LOADER_MAPPING = {
     ".ppt": (UnstructuredPowerPointLoader, {}),
     ".pptx": (UnstructuredPowerPointLoader, {}),
     ".txt": (TextLoader, {"encoding": "utf8"}),
-    # Add more mappings for other file extensions and loaders as needed
+    # Add mappings for other file extensions and loaders as needed
 }
 
 
@@ -144,6 +147,9 @@ def does_vectorstore_exist(persist_directory: str) -> bool:
 def main():
     # Create embeddings
     embeddings = HuggingFaceEmbeddings(model_name=embeddings_model_name)
+    # Change the embedding type here to the instruct embeddings if you are running into issues.
+    # If you use HuggingFaceInstructEmbeddings change it to use the same embeddings in the
+    # customGPT.py file.
 
     if does_vectorstore_exist(persist_directory):
         # Update and store locally vectorstore
@@ -151,18 +157,18 @@ def main():
         db = Chroma(persist_directory=persist_directory, embedding_function=embeddings, client_settings=CHROMA_SETTINGS)
         collection = db.get()
         texts = process_documents([metadata['source'] for metadata in collection['metadatas']])
-        print(f"Creating embeddings. May take some minutes...")
+        print(f"Creating embeddings. Be patient...")
         db.add_documents(texts)
     else:
         # Create and store locally vectorstore
         print("Creating new vectorstore")
         texts = process_documents()
-        print(f"Creating embeddings. May take some minutes...")
+        print(f"Creating embeddings. Be patient...")
         db = Chroma.from_documents(texts, embeddings, persist_directory=persist_directory, client_settings=CHROMA_SETTINGS)
     db.persist()
     db = None
 
-    print(f"Ingestion complete! You can now run privateGPT.py to query your documents")
+    print(f"Document ingestion complete! You can now run customGPT.py to query your documents")
 
 
 if __name__ == "__main__":
