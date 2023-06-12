@@ -3,7 +3,7 @@ import os
 import glob
 import sqlalchemy
 import nltk.tokenize.punkt
-nltk.data.path.append('C:/Users/bjcor/PrivateGPT/privateGPT/nltk_data/tokenizers/punkt.zip')
+nltk.data.path.append('the/path/to/nltk_data/tokenizers/punkt.zip')
 from typing import List
 from dotenv import load_dotenv
 from multiprocessing import Pool
