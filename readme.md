@@ -1,6 +1,6 @@
 # CustomGPT
-Ask questions to your documents locally without an internet connection, no data leaves your execution environment at any point. 
-No GPU is used, this is a CPU-based implementation. 
+Ask questions to your documents locally without an internet connection, no data leaves your execution environment at any point. \
+No GPU is used, this is a CPU-based implementation. \
 An internet connection is initially required to download the components but your data is processed locally.
 
 Built with [LangChain](https://github.com/hwchase17/langchain), 
@@ -51,9 +51,9 @@ From the shell/terninal, run
 ```shell
 python ingest.py
 ```
-You can ingest any number of documents, these will be accumulated in the local embeddings database.
-Ingestion will take 10-30 seconds per document, depending on the size of the document.
-The ingestor script creates a `db` folder containing the local chroma vectorstore, index, etc. 
+You can ingest any number of documents, these will be accumulated in the local embeddings database. \
+Ingestion will take 10-30 seconds per document, depending on the size of the document. \
+The ingestor script creates a `db` folder containing the local chroma vectorstore, index, etc. \ 
 To re-create the database, delete the `db` folder.
 
 Adjust the chunk size by modifying 
@@ -63,4 +63,4 @@ chunk_overlap = 100
 ```
 as needed in the script based on the content files being ingested.
 
-NOTE: There seems to be some problem with the punkt archive on http://www.nltk.org/nltk_data/, so find it eslewhere and put it somewhere locally available to the environment.
+NOTE: There seems to be some corrpution problem with the punkt archive on http://www.nltk.org/nltk_data/, so find it elsewhere and put it somewhere locally available to the environment.
