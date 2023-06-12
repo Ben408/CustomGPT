@@ -47,7 +47,7 @@ Supported formats:
    - `.ppt` : PowerPoint Document,
    - `.txt`: Text file (UTF-8),****
 
-From the shell/terninal, run
+From the shell/terminal, run
 ```shell
 python ingest.py
 ```
